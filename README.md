@@ -1,4 +1,4 @@
-# LFCS Simulator
+# LFCS Cheatsheet
 
 ## Kernel and System Info
 
@@ -228,3 +228,4 @@ LV = Logical Volume
 ``ulimit -S -u 1100`` to change the max user processes limit  
 
 ``vim /etc/security/limits.conf`` to open limits configuration  
+
