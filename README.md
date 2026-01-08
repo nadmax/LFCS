@@ -1,6 +1,6 @@
 # LFCS Simulator
 
-## Question 1 | Kernel and System Info
+## Kernel and System Info
 
 ``/etc/sysctl.conf`` to permanantly edit kernel values  
 ``sysctl -p`` to load default configuration file  
@@ -8,7 +8,7 @@ Get kernel release: ``uname -r``
 Get ``ip_forward`` Kernel parameter: ``cat /proc/sys/net/ipv4/ip_forward``  
 Get system timezone: ``date +%Z``  
 
-## Question 2 | Cronjobs
+## Cronjobs
 
 Explanation of a cronjob:
 ```
@@ -19,7 +19,7 @@ minute hour day of the month month day of the week user command
 ``crontab -e`` to edit them  
 ``/etc/crontab`` is the config file for system-wide cronjobs
 
-## Question 3 | Time synchronisation Configuration
+## Time synchronisation Configuration (NTP)
 
 ### ``man timesyncd.conf`` for help 
 
@@ -27,12 +27,12 @@ minute hour day of the month month day of the week user command
 ``sudo service systemd-timesyncd restart`` to restart the NTP (Network Time Synchronization) service  
 ``sudo grep systemd-timesyncd /var/log/syslog`` to check NTP logs about NTP modification
 
-## Question 4 | Environment Variables
+## Environment Variables
 
 ``VARIABLE="value"`` to create a variable only available in the script  
 ``export VARIABLE2="${VARIABLE}-extended"`` to create a variable available in the script and all child processes of the shell
 
-## Question 5 | Archives and Compression
+## Archives and Compression
 
 ### ``man tar``, ``man bzip2`` and ``man gzip`` for help
 
@@ -51,7 +51,7 @@ cat import001.tar.bz2_list | sha512sum
 cat import001.tar.gz_list | sha512sum
 ```  
 
-## Question 6 | User, Groups and Sudoers
+## User, Groups and Sudoers
 
 ``usermod -d [HOMEPATH] [USER]`` to change user's home directory  
 ``usermod -g [GROUP] [USER]`` to change user's group  
@@ -59,7 +59,7 @@ cat import001.tar.gz_list | sha512sum
 ``visudo`` to edit `/etc/sudoers` file  
 ``[USER] ALL=(root) NOPASSWD: [SHELL] [BASHFILE]`` to allow a nonroot user to execute a root file without asking for a password
 
-## Question 7 | Network Packet Filtering (To work)
+## Network Packet Filtering
 
 ### ``man iptables`` is helpful  
 
@@ -73,7 +73,7 @@ cat import001.tar.gz_list | sha512sum
 ``iptables -A INPUT -i eth0 -p tcp --dport [PORT] -s [ADDRESS] -j ACCEPT`` to open a port from a specific source address  
 ``iptables -A OUTPUT -d [ADDRESS] -p tcp -j DROP`` to drop outgoing packages from a specific destination address
 
-## Question 8 | Disk Management (To work)
+## Disk Management
 ``sudo fdisk -l`` to list existing disks  
 ``lsblk -f`` to list existing disk with a format  
 ``df -h`` is an alternative useful to easily check disks spaces
@@ -93,7 +93,7 @@ sudo mount /dev/[DEVICENAME] /mnt/[MOUNTNAME]
 If the `target is busy`, ``sudo lsof | grep [MOUNTPATH]`` to see open files in a specific disk  
 ``sudo kill [PID]`` to end a process
 
-## Question 9 | Find files with properties and perform actions
+## Find files with properties and perform actions
 
 ### ``man find`` to help  
 
@@ -105,7 +105,7 @@ If the `target is busy`, ``sudo lsof | grep [MOUNTPATH]`` to see open files in a
 ``find -maxdepth 1 -perm 777 -type f -exec mv {} ./[SUBFOLDER] \;``
 to find all files with too open permissions and move them into a subfolder
 
-## Question 10 | SSHFS and NFS (To work)
+## SSHFS and NFS
 
 ### ``man sshfs`` and ``man exportfs`` are helpful  
 
@@ -129,32 +129,32 @@ Example of content in `/etc/exports`
 ``showmount -e`` to see if the mount was done  
 
 
-## Question 11 | Docker Management
+## Docker
 ``sudo docker ps`` to list all Docker containers  
 ``sudo docker stop [CONTAINERNAME]`` to stop a Docker container  
 ``sudo docker inspect [CONTAINERNAME] | vim -`` open the inspected JSON Format container configuration  
 ``sudo docker run -d --name [CONTAINERNAME] --memory [SIZE] -p [LOCALPORT]:[CONTAINERPORT] [IMAGENAME]:[IMAGEVERSION]`` to build and run a detached docker image with a specific name, specific memory size, specific local and container ports from a specific image and its version
 
-## Question 12 | Git Workflow
+## Git Workflow
 ``git clone [SOURCE] [DEST]`` to clone a GIT repository to a specific location  
 
-## Question 13 | Runtime Security of processes
+## Runtime Security of processes
 ``ps aux | grep [PROCESSNAME]`` list processes having a specific name  
 ``strace -p [PID]`` to investigate the kernel syscall of a specific process
 
-## Question 14 | Output redirection
+## Output redirection
 ``>`` to redirect standard output  
 ``2>`` to redirect error output  
 ``>>`` to append standard output  
 ``2>>`` to append error output  
 ``$?`` to get the exit code  
 
-## Question 15 | Build and install from source (To work)
+## Build and install from source (To work)
 - Check the helper of the executable file  
 - Check if there is a Makefile to execute make or make install command
 - Check if it is installed with the `whereis` command
 
-## Question 16 | LoadBalancer
+## LoadBalancer
 To create a load balancer, you need to copy an existing application file located in `/etc/nginx/sites-available` and edit the copied file by adding the following content
 ```
 server {
@@ -189,7 +189,7 @@ server {
 ```
 ``sudo service nginx restart`` to restart nginx
 
-## Question 17 | OpenSSH Configuration
+## OpenSSH Configuration
 ``vim /etc/ssh/sshd_config`` to edit SSH config file  
 ``service ssh restart`` to restart SSH service
 ```bash
@@ -198,7 +198,7 @@ Match User|Group [USERNAME]|[GROUPNAME]
     Banner /etc/ssh/sshd-banner
 ```
 
-## Question 18 | LVM Storage (To work)
+## LVM Storage
 ```
 PV = Physical Volume
 VG = Volume Group
@@ -212,18 +212,19 @@ LV = Logical Volume
 ``sudo vgcreate [VGNAME] /dev/[DEVICENAME]`` to create a volume group to a specific device/disk  
 ``sudo lvcreate --size [SIZE] --name [LVNAME] [VGNAME]`` to create a specific logical volume from a specific volume group  
 
-## Question 19 | Regex, filter out log lines
+## Regex, filter out log lines
 
 ### ``man grep`` and ``man sed`` are helpful
 
 ``cat [LOGFILE] | grep -E [REGEXPATH]`` to find a pattern with a specific regex  
 ``sed 's/^container.web.*Running.*24h$/SENSITIVE LINE REMOVED/g' [FILE]`` to find a pattern with a spec
 
-## Question 20 | User and Group limits
+## User and Group limits
 
 ### ``man ulimit`` is helpful
 
 ``ulimit -a`` to check out user's limits  
 ``ulimit -u`` to list the max user processes limit  
 ``ulimit -S -u 1100`` to change the max user processes limit  
+
 ``vim /etc/security/limits.conf`` to open limits configuration  
